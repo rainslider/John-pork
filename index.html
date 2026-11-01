@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BlueArcade – Play, chat, create</title>
+<link rel="stylesheet" href="style.css"></head><body>
+<header><div class="logo" style="cursor:pointer" onclick="home()">Blue<b>Arcade</b></div>
+<input id="search" placeholder="Search 1000 games…" oninput="render()"><div class="sp"></div>
+<span id="who" style="color:var(--mu)"></span><button id="plus" title="Create / log in" onclick="plusClick()">+</button></header>
+
+<div id="home"><main><section>
+<h2>🎮 Play now</h2><div class="tabs" id="tabs"></div><div id="grid"></div>
+<div style="text-align:center;margin:18px"><button class="g" onclick="more()">Load more games</button></div></section>
+<aside><b>💬 Chat</b><div class="fr" id="fr"></div><div id="msgs"></div>
+<div style="display:flex;gap:6px;margin-top:8px"><input id="cin" placeholder="Say hi…" onkeydown="if(event.key=='Enter')send()"><button onclick="send()">Send</button></div></aside></main></div>
+
+<div id="studio"><div style="display:flex;gap:10px;align-items:center;margin-bottom:12px"><h2 style="margin:0">🛠 Studio</h2><div class="sp"></div><button class="g" onclick="home()">← Back to games</button></div>
+<div class="sg">
+<div class="panel"><b>Tools</b><div style="margin-top:8px;color:var(--mu);font-size:12px">Templates</div>
+<button class="tool" onclick="tpl('car')">🚗 Car (arrow keys)</button><button class="tool" onclick="tpl('catch')">🧺 Catcher</button><button class="tool" onclick="tpl('click')">🎯 Clicker</button><button class="tool" onclick="tpl('blank')">📄 Blank</button>
+<div style="margin-top:10px;color:var(--mu);font-size:12px">Snippets</div>
+<button class="tool" onclick="ins(SN.score)">+ Score text</button><button class="tool" onclick="ins(SN.rand)">+ Random color</button><button class="tool" onclick="ins(SN.key)">+ Keyboard input</button>
+<div style="margin-top:10px;font-size:12px;color:var(--mu)">Available: <code>cv ctx W H keys mx my loop(fn)</code>. Paste scripts from anywhere (Claude, tutorials…).</div></div>
+<div class="panel"><b>Preview</b><iframe id="prev" sandbox="allow-scripts"></iframe>
+<div style="display:flex;gap:8px;margin-top:8px"><button onclick="run()">▶ Run</button><button class="g" onclick="stopG()">■ Stop</button></div><div id="status"></div></div>
+<div class="panel"><b>Code</b><textarea id="code" spellcheck="false"></textarea>
+<label style="display:block;margin-top:10px;color:var(--mu)">Game name</label><input id="gname" placeholder="Name your game">
+<label style="margin-top:8px;display:block"><input type="checkbox" id="multi" style="width:auto"> Multiplayer</label>
+<button id="pub" style="width:100%;margin-top:10px" onclick="publish()" disabled>🚀 Publish</button><div style="font-size:12px;color:var(--mu);margin-top:4px">Publish unlocks after your game ran without errors.</div></div>
+</div></div>
+
+<div class="modal" id="auth"><div class="box"><button class="x" onclick="closeAuth()">×</button>
+<h2 id="at">Create account</h2>
+<div id="fe"><label>Email</label><input id="em" type="email" autocomplete="email"></div>
+<div id="fu"><label>Username</label><input id="un" autocomplete="username"></div>
+<label>Password</label><input id="pw" type="password" autocomplete="current-password"><div class="err" id="ae"></div>
+<button style="width:100%" id="go" onclick="submitAuth()">Create account</button>
+<div class="row"><a class="l" id="sw" onclick="setMode('login')">I already have an account</a><a class="l" onclick="setMode('signup')">Forgot password?</a></div>
+<div style="font-size:11px;color:var(--mu);margin-top:12px">Demo: accounts are saved in this browser only.</div></div></div>
+<div class="modal" id="play"><div class="box" style="max-width:540px"><button class="x" onclick="closePlay()">×</button><h2 id="pt"></h2><iframe id="pf" sandbox="allow-scripts" style="width:100%;height:340px;border:0;border-radius:12px;background:#000"></iframe><div id="pm" style="color:var(--mu);font-size:13px;margin-top:6px"></div></div></div>
+
+<script src="games.js"></script>
+<script src="chat.js"></script>
+<script src="app.js"></script>
+</body></html>
